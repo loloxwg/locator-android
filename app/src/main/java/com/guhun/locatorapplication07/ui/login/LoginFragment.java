@@ -62,7 +62,7 @@ public class LoginFragment extends Fragment{
                                 NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_siteFragment);
                                 global.setUserId(userId);
                                 TextView headText = getActivity().findViewById(R.id.headText);
-                                headText.setText("欢迎に:" + userId);
+                                headText.setText("欢迎に:\n" + userId);
                                 return;
                             case "-1":Toast.makeText(getActivity(),"用户名错误",Toast.LENGTH_SHORT).show();return;
                             case "-2":Toast.makeText(getActivity(),"密码错误",Toast.LENGTH_SHORT).show();return;

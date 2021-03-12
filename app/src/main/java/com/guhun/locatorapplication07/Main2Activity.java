@@ -30,7 +30,7 @@ public class Main2Activity extends AppCompatActivity{
         // menu should be considered as top level destinations.
         // 初始化头部
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.loginFragment,R.id.nav_user, R.id.nav_site)
+                R.id.loginFragment,R.id.nav_user, R.id.nav_site,R.id.nav_wifi)
                 .setDrawerLayout(drawer)
                 .build();
         // 初始化导航界面

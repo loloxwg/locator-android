@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_user"
         android:name="com.guhun.locatorapplication07.ui.UserFragment.UserFragment"
-        android:label="@string/menu_user"
+        android:label="个人中心"
         tools:layout="@layout/fragment_user" />
 
     <fragment
@@ -23,11 +23,11 @@
     <fragment
         android:id="@+id/nav_site"
         android:name="com.guhun.locatorapplication07.ui.SiteFragment.SiteFragment"
-        android:label="fragment_site"
+        android:label="查看位置"
         tools:layout="@layout/fragment_site" />
     <fragment
         android:id="@+id/nav_wifi"
         android:name="com.guhun.locatorapplication07.ui.WifiFragment.WifiFragment"
-        android:label="fragment_wifi"
+        android:label="指纹统计"
         tools:layout="@layout/fragment_wifi" />
 </navigation>

@@ -1,5 +1,6 @@
 package com.guhun.locatorapplication07.ui.WifiFragment;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -14,10 +15,15 @@ import android.view.ViewGroup;
 
 import com.guhun.locatorapplication07.R;
 import com.guhun.locatorapplication07.data.model.WifiViewModel;
+import com.guhun.locatorapplication07.databinding.FragmentWifiBinding;
+import com.guhun.locatorapplication07.server.WifiManageClass;
 
 public class WifiFragment extends Fragment {
 
     private WifiViewModel mViewModel;
+
+//    private FragmentWifiBinding fragmentWifiBinding;
+//    private WifiManageClass wifiManageClass;
 
     public static WifiFragment newInstance() {
         return new WifiFragment();
@@ -26,7 +32,13 @@ public class WifiFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_wifi, container, false);
+//        fragmentWifiBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_wifi,container,false);
+//        wifiManageClass = new WifiManageClass(getContext());
+//        wifiManageClass.openWifi();
+//        wifiManageClass.startScan();//
+//        String wifiInfo = wifiManageClass.getwifiInfo();
+//        return fragmentWifiBinding.getRoot();
+        return inflater.inflate(R.layout.fragment_wifi,container,false);
     }
 
     @Override

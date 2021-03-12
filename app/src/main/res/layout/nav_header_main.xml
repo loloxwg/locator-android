@@ -20,5 +20,5 @@ android:theme="@style/ThemeOverlay.AppCompat.Dark">
         android:layout_margin="20dp"
         android:text="暂未登录"
         android:textColor="@color/white"
-        android:textSize="24sp" />
+        android:textSize="20sp" />
 </LinearLayout>

@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.guhun.locatorapplication07">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+<!--    通过GPS芯片接收卫星的定位信息，定位精度达10米以内-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<!--    获取当前WiFi接入的状态以及WLAN热点的信息-->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+<!--    读取或写入登记check-in数据库属性表的权限 -->
+    <uses-permission android:name="adnroid.permission.ACCESS_CHECKIN_PROPERTTES" />
+<!--    允许程序在手机屏幕关闭后后台进程仍然运行-->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+<!--    访问网络连接，可能产生GPRS流量-->
+    <uses-permission android:name="android.permission.INTERNET" />
+<!--    改变WiFi状态-->
+    <uses-permission android:name="adnroid.permission.CHANGE_WIFI_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +23,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LocatorApplication07"
-        android:name=".data.MyAppGlobal">
+        android:name=".data.MyAppGlobal"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
         <activity
             android:name=".Main2Activity"
             android:label="@string/app_name"
