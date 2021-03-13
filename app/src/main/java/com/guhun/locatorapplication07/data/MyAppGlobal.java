@@ -9,6 +9,7 @@ public class MyAppGlobal extends Application {
     private String serverUrl;
     private UserModel userModel;
     private String userId;
+    private String right;
     @Override
     public void onCreate()
     {
@@ -37,5 +38,13 @@ public class MyAppGlobal extends Application {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getRight() {
+        return right;
+    }
+
+    public void setRight(String right) {
+        this.right = right;
     }
 }

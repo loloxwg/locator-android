@@ -5,9 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
-import android.app.Application;
+import android.annotation.SuppressLint;
+import android.content.ClipData;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,10 +19,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.asm.Label;
 import com.guhun.locatorapplication07.R;
 import com.guhun.locatorapplication07.data.MyAppGlobal;
-import com.guhun.locatorapplication07.data.model.UserModel;
 import com.guhun.locatorapplication07.server.AxiosGH;
 
 import java.util.HashMap;
@@ -26,6 +28,7 @@ import java.util.Map;
 
 public class LoginFragment extends Fragment{
 
+    MenuItem itemMaster;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -57,15 +60,24 @@ public class LoginFragment extends Fragment{
                 new AxiosGH().post(serverUrl + "/user/login", params, new AxiosGH.Callback() {
                     @Override
                     public void onSuccess(String res) {
+                        TextView headText;
                         switch (res){
                             case "1":Toast.makeText(getActivity(),"登录成功",Toast.LENGTH_SHORT).show();
                                 NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_siteFragment);
                                 global.setUserId(userId);
-                                TextView headText = getActivity().findViewById(R.id.headText);
+                                 headText = getActivity().findViewById(R.id.headText);
                                 headText.setText("欢迎に:\n" + userId);
-                                return;
-                            case "-1":Toast.makeText(getActivity(),"用户名错误",Toast.LENGTH_SHORT).show();return;
-                            case "-2":Toast.makeText(getActivity(),"密码错误",Toast.LENGTH_SHORT).show();return;
+                                global.setRight("1");
+                                break;
+                            case "10":Toast.makeText(getActivity(),"身份验证：管理员",Toast.LENGTH_SHORT).show();
+                                NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_siteFragment);
+                                global.setUserId(userId);
+                                headText = getActivity().findViewById(R.id.headText);
+                                headText.setText("管理员:\n" + userId);
+                                global.setRight("10");
+                                break;
+                            case "-1":Toast.makeText(getActivity(),"用户名错误",Toast.LENGTH_SHORT).show();break;
+                            case "-2":Toast.makeText(getActivity(),"密码错误",Toast.LENGTH_SHORT).show();break;
                             default:
                                 throw new IllegalStateException("Unexpected value: " + res);
                         }
@@ -92,4 +104,5 @@ public class LoginFragment extends Fragment{
         }
         return false;
     }
+
 }

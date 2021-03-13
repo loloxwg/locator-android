@@ -4,6 +4,7 @@ package com.guhun.locatorapplication07.server;
 import java.util.List;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
@@ -96,21 +97,13 @@ public class WifiManageClass {
 
     // 扫描网络
 
+    @SuppressLint("MissingPermission")
     public void startScan() {
         wifiManager.startScan();
 
         scanResultList = wifiManager.getScanResults(); // 扫描返回结果列表
 
-        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
+
         wifiConfigList = wifiManager.getConfiguredNetworks(); // 扫描配置列表
     }
 

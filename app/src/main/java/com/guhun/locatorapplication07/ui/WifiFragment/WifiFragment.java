@@ -17,13 +17,15 @@ import com.guhun.locatorapplication07.R;
 import com.guhun.locatorapplication07.data.model.WifiViewModel;
 import com.guhun.locatorapplication07.databinding.FragmentWifiBinding;
 import com.guhun.locatorapplication07.server.WifiManageClass;
+import com.guhun.locatorapplication07.server.WifiManagerGH;
 
 public class WifiFragment extends Fragment {
 
     private WifiViewModel mViewModel;
 
-//    private FragmentWifiBinding fragmentWifiBinding;
-//    private WifiManageClass wifiManageClass;
+    private FragmentWifiBinding fragmentWifiBinding;
+
+    private WifiManagerGH wifiManagerGH;
 
     public static WifiFragment newInstance() {
         return new WifiFragment();
@@ -32,13 +34,9 @@ public class WifiFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-//        fragmentWifiBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_wifi,container,false);
-//        wifiManageClass = new WifiManageClass(getContext());
-//        wifiManageClass.openWifi();
-//        wifiManageClass.startScan();//
-//        String wifiInfo = wifiManageClass.getwifiInfo();
-//        return fragmentWifiBinding.getRoot();
-        return inflater.inflate(R.layout.fragment_wifi,container,false);
+        fragmentWifiBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_wifi,container,false);
+        return fragmentWifiBinding.getRoot();
+//        return inflater.inflate(R.layout.fragment_wifi,container,false);
     }
 
     @Override
@@ -46,6 +44,7 @@ public class WifiFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(WifiViewModel.class);
         // TODO: Use the ViewModel
+        wifiManagerGH = new WifiManagerGH(getContext());
     }
 
 }

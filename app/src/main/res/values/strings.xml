@@ -23,8 +23,11 @@
     <string name="navHeader">暂未登录</string>
     <string name="nav_site">查看位置</string>
     <string name="nav_user">个人中心</string>
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navWifi">指纹统计</string>
+    <string name="nav_about">关于我们</string>
+    <string name="nav_master">管理操作</string>
 
 
 </resources>

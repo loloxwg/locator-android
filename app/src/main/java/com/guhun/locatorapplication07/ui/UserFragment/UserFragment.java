@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -32,6 +30,7 @@ public class UserFragment extends Fragment {
         if(global.getUserId()==null){
             Toast.makeText(getActivity(),"暂未登录",Toast.LENGTH_SHORT).show();
             NavHostFragment.findNavController(UserFragment.this).navigateUp();
+            return null;
         }
         userBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_user,container,false);
         return userBinding.getRoot();
@@ -48,10 +47,16 @@ public class UserFragment extends Fragment {
             public void onSuccess(String res) {
                 userModel = JSON.parseObject(res,UserModel.class);
                 userBinding.setUser(userModel);
-                switch (userBinding.getUser().getEmpSex()){
-                    case "男":userBinding.txEmpSex.setSelection(0);break;
-                    case "女":userBinding.txEmpSex.setSelection(1);break;
-                    default:userBinding.txEmpSex.setSelection(2);break;
+                String sex = userBinding.getUser().getEmpSex();
+                if (sex!=null)
+                {
+                    switch (sex){
+                        case "男":userBinding.txEmpSex.setSelection(0);break;
+                        case "女":userBinding.txEmpSex.setSelection(1);break;
+                        default:userBinding.txEmpSex.setSelection(2);break;
+                    }
+                }else {
+                    userBinding.txEmpSex.setSelection(2);
                 }
             }
             @Override

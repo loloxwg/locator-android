@@ -30,4 +30,14 @@
         android:name="com.guhun.locatorapplication07.ui.WifiFragment.WifiFragment"
         android:label="指纹统计"
         tools:layout="@layout/fragment_wifi" />
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.guhun.locatorapplication07.ui.AboutFragment.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/nav_master"
+        android:name="com.guhun.locatorapplication07.ui.MasterFragment.MasterFragment"
+        android:label="管理操作"
+        tools:layout="@layout/fragment_master" />
 </navigation>

@@ -1,6 +1,8 @@
 package com.guhun.locatorapplication07;
 
+import android.content.ClipData;
 import android.os.Bundle;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -15,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 
 public class Main2Activity extends AppCompatActivity{
 
+
     private AppBarConfiguration mAppBarConfiguration;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +31,9 @@ public class Main2Activity extends AppCompatActivity{
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        // 初始化头部
+        // 初始化头部,这里不注册也可以，但是会有返回按钮
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.loginFragment,R.id.nav_user, R.id.nav_site,R.id.nav_wifi)
+                R.id.loginFragment,R.id.nav_user, R.id.nav_site,R.id.nav_wifi,R.id.nav_master,R.id.nav_about)
                 .setDrawerLayout(drawer)
                 .build();
         // 初始化导航界面
@@ -42,8 +45,6 @@ public class Main2Activity extends AppCompatActivity{
 
         Toast.makeText(getApplicationContext(),"暂未登录",Toast.LENGTH_SHORT).show();
     }
-
-
 
     @Override
     public boolean onSupportNavigateUp() {

@@ -15,6 +15,14 @@
         <item
             android:id="@+id/nav_wifi"
             android:icon="@drawable/wifi"
-            android:title="指纹统计" />
+            android:title="@string/navWifi" />
+        <item
+            android:id="@+id/nav_master"
+            android:icon="@drawable/lock_alt"
+            android:title="@string/nav_master" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/info"
+            android:title="@string/nav_about" />
     </group>
 </menu>
