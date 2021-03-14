@@ -13,11 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.guhun.locatorapplication07.R;
-import com.guhun.locatorapplication07.data.model.SiteViewModel;
 
 public class SiteFragment extends Fragment {
 
-    private SiteViewModel mViewModel;
 
     public static SiteFragment newInstance() {
         return new SiteFragment();
@@ -32,7 +30,6 @@ public class SiteFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(SiteViewModel.class);
         // TODO: Use the ViewModel
     }
 

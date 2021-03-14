@@ -8,20 +8,18 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.guhun.locatorapplication07.R;
-import com.guhun.locatorapplication07.data.model.WifiViewModel;
 import com.guhun.locatorapplication07.databinding.FragmentWifiBinding;
-import com.guhun.locatorapplication07.server.WifiManageClass;
 import com.guhun.locatorapplication07.server.WifiManagerGH;
 
 public class WifiFragment extends Fragment {
-
-    private WifiViewModel mViewModel;
 
     private FragmentWifiBinding fragmentWifiBinding;
 
@@ -34,17 +32,24 @@ public class WifiFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        // DataBinding
         fragmentWifiBinding = DataBindingUtil.inflate(inflater,R.layout.fragment_wifi,container,false);
         return fragmentWifiBinding.getRoot();
-//        return inflater.inflate(R.layout.fragment_wifi,container,false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(WifiViewModel.class);
         // TODO: Use the ViewModel
+        // 获取wifi信息
         wifiManagerGH = new WifiManagerGH(getContext());
+        wifiManagerGH.initSignalList(10);
+        //
+        RecyclerView wifiListView = getActivity().findViewById(R.id.wifiListView);
+        wifiListView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        wifiListView.setAdapter(new WifiAdapter(wifiManagerGH.getSignalList()));
+
     }
+
 
 }

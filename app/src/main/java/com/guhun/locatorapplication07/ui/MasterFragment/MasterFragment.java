@@ -15,12 +15,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.guhun.locatorapplication07.data.MyAppGlobal;
-import com.guhun.locatorapplication07.data.model.MasterViewModel;
 import com.guhun.locatorapplication07.R;
 
 public class MasterFragment extends Fragment {
 
-    private MasterViewModel mViewModel;
     private MyAppGlobal global;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -37,7 +35,6 @@ public class MasterFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(MasterViewModel.class);
         // TODO: Use the ViewModel
     }
 

@@ -50,18 +50,6 @@ public class UserModel {
     }
 
     public String toParams() {
-//        return
-//                (userId==""?"":"userId=" +Uri.encode(userId)+ '&') +
-//                (userEmpId==""?"":"userEmpId=" +userEmpId+ '&') +
-//                (userRight==""?"":"userRight=" +userRight+ '&') +
-//                (empId==""?"":"empId=" +empId+ '&') +
-//                (empName==""?"":"empName=" +empName+ '&') +
-//                (empSex==""?"":"empSex=" +empSex+ '&') +
-//                (empAge==""?"":"empAge=" +empAge+ '&') +
-//                (empTel==""?"":"empTel=" +empTel+ '&') +
-//                (empJob==""?"":"empJob=" +empJob+ '&') +
-//                (empHobby==""?"":"empHobby=" +empHobby+ '&') +
-//                (empMsg==""?"":"empMsg=" +empMsg+ '&');
         return
                 (userId==""?"":"userId=" +Uri.encode(userId)+ '&') +
                 (userEmpId==""?"":"userEmpId=" +Uri.encode(userEmpId)+ '&') +
