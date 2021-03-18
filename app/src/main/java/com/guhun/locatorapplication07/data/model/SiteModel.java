@@ -1,50 +1,23 @@
 package com.guhun.locatorapplication07.data.model;
 
-/**
- * @program: LocatorApplication07
- * @description:
- * @author: GuHun
- * @create: 2021-03-16 14:02
- **/
 public class SiteModel {
-    private String userId;
-    private int wifiId;
     private int siteId;
-    private int mapId;
     private String siteName;
-    private String mapName;
-    private int gridX;
-    private int gridY;
-    private String mapUrl;
+    private String siteLocate;
+    private int siteMapId;
+    private String siteAttribute;
+    private String siteMapName;
 
     @Override
     public String toString() {
-        return
-                "userId='" + userId + '\'' + '\n' +
-                "wifiId=" + wifiId + '\n' +
-                "siteId=" + siteId + '\n' +
-                "mapId=" + mapId + '\n' +
-                "siteName='" + siteName + '\'' + '\n' +
-                "mapName='" + mapName + '\'' + '\n' +
-                "gridX=" + gridX + '\n' +
-                "gridY=" + gridY + '\n' +
-                "mapUrl='" + mapUrl + '\'';
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public int getWifiId() {
-        return wifiId;
-    }
-
-    public void setWifiId(int wifiId) {
-        this.wifiId = wifiId;
+        return "SiteModel{" +
+                "siteId=" + siteId +
+                ", siteName='" + siteName + '\'' +
+                ", siteLocate='" + siteLocate + '\'' +
+                ", siteMapId=" + siteMapId +
+                ", siteAttribute='" + siteAttribute + '\'' +
+                ", siteMapName='" + siteMapName + '\'' +
+                '}';
     }
 
     public int getSiteId() {
@@ -55,14 +28,6 @@ public class SiteModel {
         this.siteId = siteId;
     }
 
-    public int getMapId() {
-        return mapId;
-    }
-
-    public void setMapId(int mapId) {
-        this.mapId = mapId;
-    }
-
     public String getSiteName() {
         return siteName;
     }
@@ -71,35 +36,35 @@ public class SiteModel {
         this.siteName = siteName;
     }
 
-    public String getMapName() {
-        return mapName;
+    public String getSiteLocate() {
+        return siteLocate;
     }
 
-    public void setMapName(String mapName) {
-        this.mapName = mapName;
+    public void setSiteLocate(String siteLocate) {
+        this.siteLocate = siteLocate;
     }
 
-    public int getGridX() {
-        return gridX;
+    public int getSiteMapId() {
+        return siteMapId;
     }
 
-    public void setGridX(int gridX) {
-        this.gridX = gridX;
+    public void setSiteMapId(int siteMapId) {
+        this.siteMapId = siteMapId;
     }
 
-    public int getGridY() {
-        return gridY;
+    public String getSiteAttribute() {
+        return siteAttribute;
     }
 
-    public void setGridY(int gridY) {
-        this.gridY = gridY;
+    public void setSiteAttribute(String siteAttribute) {
+        this.siteAttribute = siteAttribute;
     }
 
-    public String getMapUrl() {
-        return mapUrl;
+    public String getSiteMapName() {
+        return siteMapName;
     }
 
-    public void setMapUrl(String mapUrl) {
-        this.mapUrl = mapUrl;
+    public void setSiteMapName(String siteMapName) {
+        this.siteMapName = siteMapName;
     }
 }

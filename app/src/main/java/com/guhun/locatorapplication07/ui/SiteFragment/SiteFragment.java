@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import com.alibaba.fastjson.JSONObject;
 import com.guhun.locatorapplication07.R;
 import com.guhun.locatorapplication07.data.MyAppGlobal;
-import com.guhun.locatorapplication07.data.model.SiteModel;
+import com.guhun.locatorapplication07.data.model.UserSiteModel;
 import com.guhun.locatorapplication07.databinding.FragmentSiteBinding;
 import com.guhun.locatorapplication07.server.AxiosGH;
 import com.guhun.locatorapplication07.server.GetBitMap;
@@ -49,9 +49,9 @@ public class SiteFragment extends Fragment {
         new AxiosGH().get(global.getServerUrl() + "/usersite/select?userId="+global.getUserId(), new AxiosGH.Callback() {
             @Override
             public void onSuccess(String res) {
-                SiteModel siteModel = JSONObject.parseObject(res,SiteModel.class);
-                if(siteModel.getMapUrl()!=null){
-                    String imgUrl = global.getImgUrl()+siteModel.getMapUrl();
+                UserSiteModel userSiteModel = JSONObject.parseObject(res,UserSiteModel.class);
+                if(userSiteModel.getMapUrl()!=null){
+                    String imgUrl = global.getImgUrl()+userSiteModel.getMapUrl();
                     GetBitMap.getHttpBitmap(imgUrl, new GetBitMap.Callback() {
                         @Override
                         public void onSuccess(Bitmap bitmap) {
@@ -59,7 +59,7 @@ public class SiteFragment extends Fragment {
                         }
                     });
                 }
-                binding.setSiteInfo(siteModel);
+                binding.setSiteInfo(userSiteModel);
             }
 
             @Override

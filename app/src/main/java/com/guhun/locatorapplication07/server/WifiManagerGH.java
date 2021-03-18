@@ -39,7 +39,7 @@ public class WifiManagerGH {
                     new WifiSignalModel(index,item.SSID,item.BSSID,item.level);
             index++;
             // 只存前num个
-            if(signalList.size() <= size){
+            if(signalList.size() < size){
                 signalList.add(wifiSignal);
             }else {
                 break;
