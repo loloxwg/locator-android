@@ -43,7 +43,7 @@ public class WifiFragment extends Fragment {
         // TODO: Use the ViewModel
         // 获取wifi信息
         wifiManagerGH = new WifiManagerGH(getContext());
-        wifiManagerGH.initSignalList(10);
+        wifiManagerGH.initSignalList(10,0);
         //
         RecyclerView wifiListView = getActivity().findViewById(R.id.wifiListView);
         wifiListView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));

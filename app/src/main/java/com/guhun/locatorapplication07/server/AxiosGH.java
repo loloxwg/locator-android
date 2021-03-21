@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import androidx.annotation.NonNull;
 
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,10 +24,15 @@ public class AxiosGH {
     private boolean useCaches;
     private String serverUrl;
     private int connectTimeout;
-    private String encode;
+    private Map<String,String> header;
     // 初始化实例
     public AxiosGH(){
         init();
+    }
+    // 初始化实例
+    public AxiosGH(Map<String,String> header){
+        init();
+        this.header = header;
     }
     // 默认为get请求(地址,回调函数)
     public AxiosGH(String url,Callback callback){
@@ -41,12 +48,18 @@ public class AxiosGH {
     // get请求(地址,map参数,回调函数)
     public void get(String url,Map<String,Object> params,Callback callback){
         serverUrl = url;
-        handleData(params,callback);
+
+        handleData(paramsMapToString(params),callback);
     }
     // get请求(地址,object参数,回调函数)
     public void get(String url,Object params,Callback callback) {
         serverUrl = url;
-        handleData(objectToMap(params),callback);
+        handleData(paramsJavaToString(params),callback);
+    }
+    // get请求(地址,字符串参数,回调函数)不用加?了
+    public void get(String url,String params,Callback callback) {
+        serverUrl = url;
+        handleData(params,callback);
     }
     // post请求(地址,回调函数)
     public void post(String url,Callback callback){
@@ -58,24 +71,36 @@ public class AxiosGH {
     public void post(String url,Map<String,Object> params,Callback callback){
         requestMethod = "POST";
         serverUrl = url;
-        handleData(params,callback);
+        handleData(paramsMapToString(params),callback);
     }
-    // post请求(地址,map参数,回调函数)
+    // post请求(地址,javaObject参数,回调函数)
     public void post(String url,Object params,Callback callback) {
         requestMethod = "POST";
         serverUrl = url;
-        handleData(objectToMap(params),callback);
+        handleData(paramsJavaToString(params),callback);
+    }
+    /**
+    * @Description: params是json字符串
+    * @Param: post请求(地址,jsonArray参数,回调函数)
+    * @return: void
+    * @Author: GuHun
+    * @Date: 2021/3/19
+    */
+    public void post(String url, String params, Callback callback) {
+        requestMethod = "POST";
+        serverUrl = url;
+        handleData(params,callback);
     }
     // 初始化参数
     private void init(){
         requestMethod = "GET";
         useCaches = false;
         connectTimeout = 3000;
-        encode="utf-8";
+        header = new HashMap<>();
     }
 
     //handle中操作页面，以及创建线程
-    private void handleData(Map<String, Object> params, Callback callback){
+    private void handleData(String params, Callback callback){
         @SuppressLint("HandlerLeak")
         android.os.Handler handler = new Handler(){
             @Override
@@ -87,17 +112,58 @@ public class AxiosGH {
         new Thread(new Runnable(){
             @Override
             public void run() {
-                submitAllData(params,callback,handler);
+                httpRequest(params,callback,handler);
             }
         }).start();
     }
-    // 博客园-依旧淡然
-    //HttpUtils.submitPostData(params, "utf-8")
-    private void submitAllData(Map<String, Object> params, Callback callback,Handler handler){
+    // paramsobjectToMap
+    public static Map<String, Object> paramsJavaToMap(Object obj) {
+        Map<String, Object> map = new HashMap<>();
+        Class<?> clazz = obj.getClass();
+        for (Field field : clazz.getDeclaredFields()) {
+            field.setAccessible(true);
+            String fieldName = field.getName();
+            Object value = null;
+            try {
+                value = field.get(obj);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            map.put(fieldName, value);
+        }
+        return map;
+    }
+    // paramsMapToString
+    public static String paramsMapToString(Map<String, Object> params){
         String data = null;
         if (params!=null) {
-             data = getRequestData(params, encode).toString();
+            StringBuffer stringBuffer = new StringBuffer();        //存储封装好的请求体信息
+            try {
+                for(Map.Entry<String, Object> entry : params.entrySet()) {
+                    stringBuffer.append(entry.getKey())
+                            .append("=")
+                            .append(Uri.encode(entry.getValue().toString(), "utf-8"))
+                            .append("&");
+                }
+                stringBuffer.deleteCharAt(stringBuffer.length() - 1);    //删除最后的一个"&"
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+             data = stringBuffer.toString();
         }
+        return data;
+    }
+    // paramsJavaToString
+    public static String paramsJavaToString(Object params){
+        String data = null;
+        if(params!=null){
+            data = paramsMapToString(paramsJavaToMap(params));
+        }
+        return data;
+    }
+
+    //HttpUtils.submitPostData(params, "utf-8")
+    private void httpRequest(String data, Callback callback, Handler handler){
         try {
             if(requestMethod.equals("GET") && data != null){
                 serverUrl += '?'+data;
@@ -114,6 +180,12 @@ public class AxiosGH {
                 connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 //设置请求体的长度
                 connection.setRequestProperty("Content-Length", String.valueOf(data.getBytes().length));
+                if (header.get("Content-Type")!=null){
+                    connection.setRequestProperty("Content-Type",header.get("Content-Type"));
+                }
+                if (header.get("accept")!=null){
+                    connection.setRequestProperty("accept",header.get("accept"));
+                }
                 //获得输出流，向服务器写入数据
                 OutputStream outputStream = connection.getOutputStream();
                 outputStream.write(data.getBytes());
@@ -131,22 +203,7 @@ public class AxiosGH {
             e.printStackTrace();
         }
     }
-    // 博客园-依旧淡然
-    private static StringBuffer getRequestData(Map<String, Object> params, String encode) {
-        StringBuffer stringBuffer = new StringBuffer();        //存储封装好的请求体信息
-        try {
-            for(Map.Entry<String, Object> entry : params.entrySet()) {
-                stringBuffer.append(entry.getKey())
-                        .append("=")
-                        .append(Uri.encode(entry.getValue().toString(), encode))
-                        .append("&");
-            }
-            stringBuffer.deleteCharAt(stringBuffer.length() - 1);    //删除最后的一个"&"
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return stringBuffer;
-    }
+
     // 博客园-依旧淡然
     private static String dealResponseResult(InputStream inputStream) {
         String resultData = null;      //存储处理结果
@@ -169,29 +226,6 @@ public class AxiosGH {
         void onFailed(String err);
     }
 
-    /**
-    * @Description: java类型转为map类型
-    * @Param: [obj]
-    * @return: java.util.Map<java.lang.String,java.lang.Object>
-    * @Date: 2021/3/11
-    */
-    public static Map<String, Object> objectToMap(Object obj) {
-        Map<String, Object> map = new HashMap<String,Object>();
-        Class<?> clazz = obj.getClass();
-        for (Field field : clazz.getDeclaredFields()) {
-            field.setAccessible(true);
-            String fieldName = field.getName();
-            Object value = null;
-            try {
-                value = field.get(obj);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-            map.put(fieldName, value);
-        }
-        return map;
-    }
-
     // 请求方式
     public void setRequestMethod(String requestMethod) {
         this.requestMethod = requestMethod;
@@ -207,9 +241,5 @@ public class AxiosGH {
     // 请求参数
     public void setConnectTimeout(int connectTimeout) {
         this.connectTimeout = connectTimeout;
-    }
-    // 编码方式
-    public void setEncode(String encode) {
-        this.encode = encode;
     }
 }

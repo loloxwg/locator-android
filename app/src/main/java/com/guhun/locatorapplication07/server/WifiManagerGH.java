@@ -31,12 +31,12 @@ public class WifiManagerGH {
     * @Author: GuHun
     * @Date: 2021/3/14
     */
-    public ArrayList<WifiSignalModel> initSignalList(int size) {
+    public ArrayList<WifiSignalModel> initSignalList(int size, int wifiId) {
         signalList = new ArrayList<>();
         int index = 1;
         for (ScanResult item : wifiList){
             WifiSignalModel wifiSignal =
-                    new WifiSignalModel(index,item.SSID,item.BSSID,item.level);
+                    new WifiSignalModel(index,wifiId,item.SSID,item.BSSID,item.level);
             index++;
             // 只存前num个
             if(signalList.size() < size){

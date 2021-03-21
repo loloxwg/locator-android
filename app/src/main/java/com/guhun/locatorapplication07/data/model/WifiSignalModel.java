@@ -16,8 +16,9 @@ public class WifiSignalModel {
 
 
     public WifiSignalModel(){}
-    public WifiSignalModel(int index, String signalName, String signalMac, int signalPower){
+    public WifiSignalModel(int index, int signalWifiId, String signalName, String signalMac, int signalPower){
         this.index = index;
+        this.signalWifiId = signalWifiId;
         this.signalName = signalName;
         this.signalMac = signalMac;
         this.signalPower = signalPower;

@@ -3,6 +3,7 @@ package com.guhun.locatorapplication07.ui.MasterFragment;
 import androidx.databinding.DataBindingUtil;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -88,32 +89,30 @@ public class MasterFragment extends Fragment {
                         int wifiId = json.getIntValue("wifiId");
 
                         wifiManagerGH = new WifiManagerGH(getContext());
-                        wifiManagerGH.initSignalList(10);
+                        wifiManagerGH.initSignalList(10, wifiId);
                         ArrayList<WifiSignalModel> signalModels = wifiManagerGH.getSignalList();
-                        //
-                        //
-                        //
-                        //这里
-                        //
-                        //
-                        // 处理json数组格式的参数
-                        new AxiosGH().get(global.getServerUrl() + "/signal/insert",signalModels, new AxiosGH.Callback() {
+                        String array = JSONArray.toJSON(signalModels).toString();
+
+                        Map<String,String> header = new HashMap<>();
+                        header.put("Content-Type","application/json; charset=UTF-8");
+                        header.put("accept","application/json");
+                        new AxiosGH(header).post(global.getServerUrl() + "/signal/insert",array, new AxiosGH.Callback() {
                             @Override
                             public void onSuccess(String res) {
-
+                                if(json.getBoolean("isUpdata")){
+                                    Toast.makeText(getContext(),"更新成功！",Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(getContext(),"创建成功！",Toast.LENGTH_SHORT).show();
+                                }
                             }
 
                             @Override
                             public void onFailed(String err) {
-
+                                Toast.makeText(getContext(),"采集失败！",Toast.LENGTH_SHORT);
                             }
                         });
 
-                        if(json.getBoolean("isUpdata")){
-                            Toast.makeText(getContext(),"更新成功！",Toast.LENGTH_SHORT);
-                        }else {
-                            Toast.makeText(getContext(),"创建成功！",Toast.LENGTH_SHORT);
-                        }
+
 
                     }
 

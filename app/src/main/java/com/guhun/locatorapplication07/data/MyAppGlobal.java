@@ -11,12 +11,14 @@ public class MyAppGlobal extends Application {
     private String userId;
     private String right;
     private String imgUrl;
+    public final int FINDSignalSize = 4; // 指纹匹配时采集尺寸
+    public final int INSERTSignalSize = 10; // 指纹采集时上传尺寸
     @Override
     public void onCreate()
     {
         super.onCreate();
-        imgUrl="https://wifimap-1304806518.cos.ap-shanghai.myqcloud.com/";
-        setServerUrl("http://121.4.217.63:8080/locator_server"); // 初始化全局变量
+        imgUrl = "https://wifimap-1304806518.cos.ap-shanghai.myqcloud.com/"; // 图片服务器地址
+        serverUrl = "http://121.4.217.63:8080/locator_server"; // 服务器地址
     }
     public String getServerUrl() {
         return serverUrl;
@@ -57,4 +59,5 @@ public class MyAppGlobal extends Application {
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
     }
+
 }
