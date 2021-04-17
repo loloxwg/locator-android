@@ -55,11 +55,7 @@ public class MasterFragment extends Fragment {
             NavHostFragment.findNavController(MasterFragment.this).navigateUp();
             return null;
         }
-        if (global.getRight() != "10") {
-            Toast.makeText(getActivity(), "权限不足，无法访问", Toast.LENGTH_SHORT).show();
-            NavHostFragment.findNavController(MasterFragment.this).navigateUp();
-            return null;
-        }
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_master, container, false);
         binding.setShowView(View.GONE);
         return binding.getRoot();
@@ -69,6 +65,11 @@ public class MasterFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // TODO: Use the ViewModel
+        if (global.getRight() != "10") {
+            Toast.makeText(getActivity(), "权限不足，无法访问", Toast.LENGTH_SHORT).show();
+            NavHostFragment.findNavController(MasterFragment.this).navigateUp();
+            return;
+        }
         getMapList();
         binding.btnGetSite.setOnClickListener(new View.OnClickListener() {
             @Override

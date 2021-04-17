@@ -13,6 +13,7 @@ public class MyAppGlobal extends Application {
     private String imgUrl;
     public final int FINDSignalSize = 4; // 指纹匹配时采集尺寸
     public final int INSERTSignalSize = 10; // 指纹采集时上传尺寸
+    public final int REFRESHTIME = 10; // 扫描时间间隔(秒)
     @Override
     public void onCreate()
     {

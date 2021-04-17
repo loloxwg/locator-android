@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.guhun.locatorapplication07.ui.login.LoginFragment"
-        android:label="fragment_login"
+        android:label="用户登录"
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_siteFragment"
