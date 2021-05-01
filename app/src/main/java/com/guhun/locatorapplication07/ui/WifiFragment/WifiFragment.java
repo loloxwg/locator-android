@@ -44,24 +44,20 @@ public class WifiFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         // TODO: Use the ViewModel
-        // 创建wifi对象
-        wifiManagerGH = new WifiManagerGH(getContext());
-
-
         // 格式化刷新时间
-        int time = global.REFRESHTIME;
-        String timeText = time + "s";
-        if(time >= 60){
-            int mm = time / 60;
-            int ss = time % 60;
-            timeText = mm + "m" + ss + "s";
-            if(mm >= 60){
-                int hh = mm / 60;
-                mm = mm % 60;
-                timeText = hh + "h" + mm + "m" + ss + "s";
-            }
-        }
-        fragmentWifiBinding.textView11.setText("扫描时间间隔："+timeText);
+//        int time = global.REFRESHTIME;
+//        String timeText = time + "s";
+//        if(time >= 60){
+//            int mm = time / 60;
+//            int ss = time % 60;
+//            timeText = mm + "m" + ss + "s";
+//            if(mm >= 60){
+//                int hh = mm / 60;
+//                mm = mm % 60;
+//                timeText = hh + "h" + mm + "m" + ss + "s";
+//            }
+//        }
+//        fragmentWifiBinding.textView11.setText("扫描时间间隔："+timeText);
 
         // 获取wifi信息
         getWifiInfo();
@@ -83,6 +79,8 @@ public class WifiFragment extends Fragment {
      * 2021年4月8日10:31:12
      */
     private void getWifiInfo() {
+        // 创建wifi对象
+        wifiManagerGH = new WifiManagerGH(getContext());
         // 获取wifi信息
         wifiManagerGH.initSignalList(10,0);
         // wifilist绑定适配器
