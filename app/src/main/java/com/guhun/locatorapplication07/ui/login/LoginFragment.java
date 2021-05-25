@@ -28,7 +28,6 @@ import java.util.Map;
 
 public class LoginFragment extends Fragment{
 
-    MenuItem itemMaster;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,7 +64,7 @@ public class LoginFragment extends Fragment{
                             case "1":Toast.makeText(getActivity(),"登录成功",Toast.LENGTH_SHORT).show();
                                 NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_siteFragment);
                                 global.setUserId(userId);
-                                 headText = getActivity().findViewById(R.id.headText);
+                                headText = getActivity().findViewById(R.id.headText);
                                 headText.setText("欢迎に:\n" + userId);
                                 global.setRight("1");
                                 break;
@@ -92,7 +91,7 @@ public class LoginFragment extends Fragment{
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(),"111",Toast.LENGTH_SHORT).show();
+                NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_registerFragment);
             }
         });
     }

@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_loginFragment_to_siteFragment"
             app:destination="@id/nav_site" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_site"
@@ -40,4 +43,13 @@
         android:name="com.guhun.locatorapplication07.ui.MasterFragment.MasterFragment"
         android:label="管理操作"
         tools:layout="@layout/fragment_master" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.guhun.locatorapplication07.ui.login.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>
