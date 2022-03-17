@@ -20,7 +20,7 @@ public class MyAppGlobal extends Application {
     {
         super.onCreate();
         imgUrl = "https://wifimap-1304806518.cos.ap-shanghai.myqcloud.com/"; // 图片服务器地址
-        serverUrl = "http://121.4.217.63:8080/locator_server"; // 服务器地址
+        serverUrl = "http://124.222.47.219:9100/locator_server"; // 服务器地址
     }
     public String getServerUrl() {
         return serverUrl;
